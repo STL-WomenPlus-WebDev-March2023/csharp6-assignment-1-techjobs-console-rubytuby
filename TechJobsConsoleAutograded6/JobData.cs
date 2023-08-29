@@ -47,7 +47,20 @@ namespace TechJobsConsoleAutograded6
             // load data, if not already loaded
             LoadData();
 
-            return null;
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+               foreach (KeyValuePair<string, string> kvp in row)
+                {
+                    if (kvp.Value.ToLower().Contains(value.ToLower()) && jobs.Contains(row) == false)
+                    {
+                        jobs.Add(row);
+                    }
+                }
+                
+            }
+            return jobs;
         }
 
         /**
@@ -70,7 +83,7 @@ namespace TechJobsConsoleAutograded6
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
